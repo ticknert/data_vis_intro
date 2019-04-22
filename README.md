@@ -2,3 +2,6 @@
 Python Crash Course - Data Vis
 
 An attempt to use github while going through the Data Visualization Section of Python Crash Course
+
+## This is my work... 
+Hopefully this whole thing works.
