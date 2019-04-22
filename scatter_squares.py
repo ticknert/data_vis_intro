@@ -2,9 +2,10 @@
 
 from matplotlib import pyplot as plt
 
-x_values = [1,2,3,4,5]
-y_values = [1,4,9,16,25]
-plt.scatter(x_values, y_values, s=100)
+# Let's create a lot of values using loops
+x_values = list(range(1,1001))
+y_values = [x**2 for x in x_values]
+plt.scatter(x_values, y_values, edgecolors=None, s=15)
 
 # Set plot title and label axis.
 plt.title("Square Numbers", fontsize=24)
@@ -13,5 +14,8 @@ plt.ylabel("Square of Value", fontsize=18)
 
 # Set size of tick labels.
 plt.tick_params(axis='both', which='major', labelsize=10)
+
+# Set the range for each axis.
+plt.axis([0, 1100, 0, 1100000])
 
 plt.show()
