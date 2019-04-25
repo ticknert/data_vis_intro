@@ -35,7 +35,10 @@ class RandomWalk():
             self.x_value.append(next_x)
             self.y_value.append(next_y)
 
-    def plot_walk(self):
+    def plot_walk(self, bigger=False):
         """Generate a plot of the walk."""
-        plt.scatter(self.x_value, self.y_value, s=15)
+        if bigger:
+            plt.scatter(self.x_value, self.y_value, s=40)
+        else:
+            plt.scatter(self.x_value, self.y_value, s=15)
         plt.show()
