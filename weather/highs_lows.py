@@ -24,15 +24,17 @@ with open(filename) as file_obj:
         high = int(row[1])
         highs.append(high)
 
-        low = int(row[2])
+        low = int(row[3])
         lows.append(low)
 
 # Plot the data.
 fig = plt.figure(dpi=128, figsize=(10,6))
-plt.plot(dates, highs, c='red')
+plt.plot(dates, highs, c='red', alpha=0.75)
+plt.plot(dates, lows, c='blue', alpha=0.75)
+plt.fill_between(dates, highs, lows, facecolor='purple', alpha=0.1)
 
 # Format the plot.
-plt.title("Daily High Temperatures, July 2014", fontsize=20)
+plt.title("Daily High and Low Temperatures - 2014", fontsize=20)
 plt.xlabel("", fontsize=16)
 fig.autofmt_xdate() # To make the dates fit on the bottom without overlapping.
 plt.ylabel("Temperature (F)", fontsize=16)
