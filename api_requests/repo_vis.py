@@ -5,8 +5,19 @@ import requests
 import pygal
 from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
 
+# Allow the user to enter a language to see repositories on GitHub.
+allowed_languages = ['javascript', 'ruby', 'c', 'java', 'perl',
+                    'python', 'haskell', 'go']
+language = input("Which language would you like to see? ").lower().strip()
+
+# Verify that the user entered a valid language.
+while language not in allowed_languages:
+    language = input("You can say: Javascript, Ruby, C, Java, Perl, Python, " +
+                "Haskell, or Go. Try Again. ")
+
 # Make an API call and store the response.
-url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
+url = ('https://api.github.com/search/repositories?q=' + language + 
+        ':python&sort=stars')
 r = requests.get(url)
 print("Status Code: ", r.status_code)
 # During more complex API calls, the program should check for status code == 200
@@ -51,8 +62,8 @@ config.truncate_label = 15
 config.show_y_guides = False
 config.width = 1000
 chart = pygal.Bar(config=config, style=style)
-chart.title = "Most-Starred Python Repositories on GitHub"
+chart.title = "Most-Starred " + language + " Repositories on GitHub"
 chart.x_labels = names
 
 chart.add('', plot_dicts)
-chart.render_to_file('files/python_repos.svg')
+chart.render_to_file('files/' + language + '_repos.svg')
