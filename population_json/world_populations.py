@@ -2,6 +2,7 @@
 
 import json
 from pygal.maps.world import World
+from pygal.style import RotateStyle, LightColorizedStyle # To make the map more prettier.
 from countries import get_country_code
 
 # Load the data into a list.
@@ -18,10 +19,24 @@ for pop_dict in pop_data:
         if code:
             world_pop[code] = population
 
-population
+# Group the countries by population
+pop_group_1, pop_group_2, pop_group_3 = {}, {}, {}
+for cc, pop in world_pop.items():
+    if pop < 10000000:
+        pop_group_1[cc] = pop
+    if pop > 10000000 and pop < 1000000000:
+        pop_group_2[cc] = pop
+    if pop > 1000000000:
+        pop_group_3[cc] = pop
 
-wm = World()
-wm.title = "World Populations"
-wm.add('2010', world_pop)
+# See how many countries are in each group.
+print(len(pop_group_1), len(pop_group_2), len(pop_group_3))
+
+wm_style = RotateStyle('#336699', base_style=LightColorizedStyle)
+wm = World(style=wm_style)
+wm.title = "World Populations, by Country"
+wm.add('0-10mm', pop_group_1)
+wm.add('10mm-1bn', pop_group_2)
+wm.add('>1bn', pop_group_3)
 
 wm.render_to_file('files/world_populations.svg')
